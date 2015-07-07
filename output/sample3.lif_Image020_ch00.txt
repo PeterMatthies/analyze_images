@@ -1,0 +1,7 @@
+center	of mass	green			blue			red		
+center_x	center_y	object_intensity	cm_intensity	avg_intensity	object_intensity	cm_intensity	avg_intensity	object_intensity	cm_intensity	avg_intensity
+253	355	7591	74	759	8975	122	897	5456	60	545
+348	241	2042	11	204	5851	86	585	16756	255	1675
+185	168	2905	47	290	1092	15	109	5062	72	506
+254	354	8405	176	840	7430	110	743	4699	66	469
+348	241	2042	11	204	5851	86	585	16756	255	1675

@@ -1,0 +1,7 @@
+center	of mass	green		blue		red	
+center_x	center_y	object_intensity	cm_intensity	object_intensity	cm_intensity	object_intensity	cm_intensity
+264	192	2312	2	4545	2	12193	3
+273	211	6867	3	14813	4	2141	3
+42	193	4832	2	9159	3	5393	3
+264	198	9551	7	11039	2	6752	3
+42	92	8739	2	9037	2	5214	3

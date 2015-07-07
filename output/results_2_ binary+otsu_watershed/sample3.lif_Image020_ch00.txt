@@ -1,0 +1,6 @@
+center	of mass	green		blue		red	
+center_x	center_y	object_intensity	cm_intensity	object_intensity	cm_intensity	object_intensity	cm_intensity
+251	357	5704	2	10052	2	5976	3
+348	241	2042	3	5851	2	16756	3
+251	358	5556	2	10174	2	6096	3
+348	241	2042	3	5851	2	16756	3
