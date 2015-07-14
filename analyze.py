@@ -33,12 +33,12 @@ def find_beads(path_to_red_img, path_to_blue_img, radius):
 
     # finding beads via contours applying different threshold with each step
     beads_com_list, beads_centers = [], []
-    for i in range(0, 255, 1):
+    for i in range(10, 255, 1):
         ret, thresh = cv2.threshold(sum_ch, i, 255, cv2.THRESH_BINARY)
         contours, hierarchy = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_NONE)
         for cnt in contours:
             # checking if the contour area is close to the assumed (pi*r^2) bead area
-            if np.pi*radius*radius-5 < cv2.contourArea(cnt) < np.pi*radius*radius+5:
+            if np.pi*radius*radius-10 < cv2.contourArea(cnt) < np.pi*radius*radius+10:
                 # calculating center of mass
                 moments = cv2.moments(cnt)
                 center_of_mass_y = int(moments['m01'] / moments['m00'])
@@ -66,7 +66,7 @@ def find_beads(path_to_red_img, path_to_blue_img, radius):
             elif beads_com_list[j] not in beads_centers:
                 beads_centers.append(beads_com_list[j])
     #cv2.imshow('contours', sum_color)
-    #cv2.imwrite('./output/found_contours_'+path_to_red_img[-29:-9]+'.png', sum_color)
+    cv2.imwrite('./output/latest_data/2015-07-02_Beads_PE_12samples_output/found_contours_'+path_to_red_img[-29:-9]+'.png', sum_color)
     #cv2.waitKey(0)
     #cv2.destroyAllWindows()
     #print beads_com_list
@@ -101,7 +101,7 @@ def calculate_intensities(image, beads_coords, radius, bg_tresh):
         # calculating sum object intensity, average obj intensity, center of mass intensity
         obj_int = np.sum(result_array)
         #print obj_int
-        avg_int = obj_int/(len(result_array) * len(result_array))
+        avg_int = obj_int/float((len(result_array) * len(result_array)))
         obj_ints_list.append(obj_int)
         avg_ints.append(avg_int)
         peak_ints.append(image[center[1], center[0]])
@@ -110,7 +110,7 @@ def calculate_intensities(image, beads_coords, radius, bg_tresh):
     bg_int = np.argmax(hist)
     bg_img = bg_img.flatten()
     rms_list = [abs(int(i)*int(i) - bg_int*bg_int) for i in bg_img if i < bg_tresh]
-    bg_rms = sum(rms_list)/len(rms_list)
+    bg_rms = sum(rms_list)/float(len(rms_list))
     print 'average bg int', bg_int, '||', 'average bg int rms', bg_rms
     bg_int_list = [bg_int for n in obj_ints_list]
     bg_rms_list = [bg_rms for n in obj_ints_list]
@@ -126,7 +126,7 @@ start = time.time()
 parser = argparse.ArgumentParser(description='script calculating centers of mass '
                                              'of objects and their intensities')
 parser.add_argument('--input', action='store', help='specify input directory name', default='./images/')
-parser.add_argument('-r', '--radius', action='store', help='specify  radius of the object', default=5)
+parser.add_argument('-r', '--radius', action='store', help='specify  radius of the object', default=6)
 parser.add_argument('--output', action='store', help='specify output directory name', default='./output/')
 parser.add_argument('--thresh', '-t', action='store', help='specify threshold value '
                                                            'for background intensity rms calculation', default=256)
